@@ -1,0 +1,45 @@
+﻿/* Outer container bubble */
+.feedback-bubble-container {
+    background: #ffe4ec; /* soft pink */
+    border-radius: 30px;
+    padding: 30px;
+    margin-top: 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+/* Each feedback bubble */
+.feedback-bubble {
+    position: relative;
+    background: #fff;
+    border-radius: 20px;
+    padding: 20px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+/* Date on top-left */
+.feedback-date {
+    position: absolute;
+    top: 10px;
+    left: 15px;
+    font-size: 12px;
+    color: #666;
+}
+
+/* Message text */
+.feedback-message {
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.4;
+    padding-top: 20px; /* pushes text below the date */
+}
+
+/* No feedback placeholder */
+.no-feedback {
+    text-align: center;
+    color: #777;
+    padding: 20px;
+    font-style: italic;
+}

@@ -1,0 +1,41 @@
+﻿@page
+@model BlinkshieldAdmin.Pages.AdminFeedbacksModel
+@{
+    ViewData["Title"] = "Feedback Management";
+}
+
+<link rel="stylesheet" href="~/css/adminfeedbacks.css" asp-append-version="true" />
+
+<div class="feedback-header">
+    <h2>Feedbacks</h2>
+</div>
+
+<form method="get" class="search-form">
+    <div class="search-container">
+        <span class="search-icon">🔍</span>
+        <input type="text" name="SearchTerm" placeholder="Search..." value="@Model.SearchTerm" />
+    </div>
+</form>
+
+<!-- Success / Info Message -->
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">@TempData["Success"]</div>
+}
+
+<div class="feedback-bubble-container">
+    @if (Model.Feedbacks != null && Model.Feedbacks.Any())
+    {
+        foreach (var fb in Model.Feedbacks)
+        {
+            <div class="feedback-bubble">
+                <span class="feedback-date">@fb.CreatedAt.ToString("yyyy-MM-dd HH:mm")</span>
+                <p class="feedback-message">@fb.Message</p>
+            </div>
+        }
+    }
+    else
+    {
+        <div class="no-feedback">No feedbacks found.</div>
+    }
+</div>

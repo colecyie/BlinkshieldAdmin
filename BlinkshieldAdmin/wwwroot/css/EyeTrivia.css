@@ -1,0 +1,201 @@
+﻿/* Main bubble styling */
+
+
+.eyetrivia {
+    background-color: #ffe4ec; /* soft pink bubble */
+    border-radius: 20px;
+    padding: 20px;
+    height: 80vh; /* fixed height for the bubble */
+    overflow-y: auto; /* internal scroll */
+    box-shadow: 0 4px 12px rgba(255, 105, 180, 0.15);
+    display: flex;
+    flex-direction: column;
+    scrollbar-width: thin;
+    scrollbar-color: #ffb6c1 #ffe4ec;
+}
+
+    .eyetrivia::-webkit-scrollbar-track {
+        background: #ffe4ec;
+        border-radius: 10px;
+    }
+
+    .eyetrivia::-webkit-scrollbar-thumb {
+        background-color: #ffb6c1;
+        border-radius: 10px;
+    }
+
+        .eyetrivia::-webkit-scrollbar-thumb:hover {
+            background-color: #ff69b4;
+        }
+
+    /* Title styling */
+    .eyetrivia h2 {
+        font-family:Cooper;
+        text-align: center;
+        color: #ff69b4;
+        margin-bottom: 15px;
+        text-shadow: 1px 1px 2px rgba(255, 105, 180, 0.3);
+    }
+
+/* Header section (Add + Search) */
+.eyetrivia-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+/* Add trivia button */
+.addtriv {
+    background-color: #ffb6c1;
+    color: #fff;
+    padding: 8px 15px;
+    border-radius: 15px;
+    border: none;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.2s;
+}
+
+    .addtriv:hover {
+        background-color: #ff69b4;
+    }
+
+.search-form {
+    max-width: 300px;
+    width: 100%;
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+    background: #fff;
+    border-radius: 15px;
+    padding: 5px 10px;
+    box-shadow: 0 2px 5px rgba(255, 105, 180, 0.15);
+    margin-left: 70px;
+}
+
+.search-icon {
+    color: #ff69b4;
+    font-size: 14px;
+    margin-right: 8px;
+}
+
+.search-container input {
+    border: none;
+    outline: none;
+    flex: 1;
+    font-size: 14px;
+    background: transparent;
+}
+
+
+
+
+/* Table styling */
+.eyetriv {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 15px;
+    background: #fff;
+    overflow: hidden;
+    border: 1px solid #f8c6d8;
+}
+
+    .eyetriv th,
+    .eyetriv td {
+        padding: 10px;
+        text-align: left;
+        
+    }
+
+    .eyetriv th {
+        text-align: center;
+        background-color: #ffb6c1;        
+        color: #fff;
+    }
+
+    /* Removed hover effect */
+    .eyetriv-table tr:hover {
+        background-color: transparent;
+    }
+
+/* Action buttons */
+.edittriv, .deletetriv {
+    border: none;
+    padding: 6px 10px;
+    border-radius: 50%;
+    font-size: 16px;
+    cursor: pointer;
+    margin: 0 3px;
+    transition: background-color 0.2s;
+}
+
+.edittriv {
+    background-color: #ffb6c1;
+    color: white;
+}
+
+    .edittriv:hover {
+        background-color: #ff69b4;
+    }
+
+.deletetriv {
+    background-color: #ff7f7f;
+    color: white;
+}
+
+    .deletetriv:hover {
+        background-color: #ff4d4d;
+    }
+
+    .viewtriv{
+        color: #5a2d32;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    .viewtriv:hover{
+        color: #ff9999;
+    }
+
+.addedtriv {
+    background-color: #ffb6c1;
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 25px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+    .addedtriv:hover {
+        background-color: #ff69b4;
+    }
+
+.canceltriv {
+    background-color: #ffd6e7;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 25px;
+    color: #ff69b4;
+    font-size: 0.95rem;
+    cursor: pointer;
+    margin-left: 8px;
+    transition: background-color 0.3s ease;
+}
+
+    .canceltriv:hover {
+        background-color: #ffc0cb;
+    }
+.form-triv label {
+    font-weight: bold;
+    color: #ff69b4;
+}

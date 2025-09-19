@@ -1,0 +1,149 @@
+﻿@page
+@model BlinkshieldAdmin.Pages.AchievementsModel
+@{
+    ViewData["Title"] = "Achievements";
+}
+
+<div class="achie">
+
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <button class="addach" onclick="toggleAchForm()">Add New Achievement</button>
+
+        <form method="get" class="search-form">
+            <div class="search-container">
+                <span class="search-icon">🔍</span>
+                <input type="text" name="SearchTerm" placeholder="Search..." value="@Model.SearchTerm" />
+            </div>
+        </form>
+
+    </div>
+
+    <!-- Pink Bubble -->
+    <div class="achievements">
+        <div class="content">
+            <!-- Add/Edit Form -->
+            <div id="achForm" class="d-none">
+                <form method="post" asp-page-handler="Add">
+                    <div class="form-ach">
+                        <label>Title*</label>
+                        <input type="text" class="form-control" name="Achievement.Title" maxlength="150" required />
+                    </div>
+
+                    <div class="form-ach">
+                        <label>Description*</label>
+                        <textarea class="form-control" name="Achievement.Description" rows="3" required></textarea>
+                    </div>
+
+                    <div class="form-ach">
+                        <label>Points*</label>
+                        <input type="number" class="form-control" name="Achievement.Points" required />
+                    </div>
+
+                    <div class="form-ach">
+                        <label>Requirement Type</label>
+                        <input type="text" class="form-control" name="Achievement.RequirementType" />
+                    </div>
+
+                    <div class="form-ach">
+                        <label>Requirement Value</label>
+                        <input type="number" class="form-control" name="Achievement.RequirementValue" />
+                    </div>
+
+                    <button type="submit" class="addedach">Save Achievement</button>
+                    <button type="button" class="cancelach" onclick="cancelAchForm()">Cancel</button>
+                </form>
+            </div>
+
+            <!-- Table -->
+            <table class="tableach">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Points</th>
+                        <th>Requirement Type</th>
+                        <th>Requirement Value</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var ach in Model.AchievementList)
+                    {
+                        <tr>
+                            <td>@ach.Title</td>
+                            <td>@ach.Description</td>
+                            <td>@ach.Points</td>
+                            <td>@ach.RequirementType</td>
+                            <td>@ach.RequirementValue</td>
+                            <td>
+                                <button type="button" class="editach"
+                                        onclick="populateEditAch('@ach.AchievementId', `@ach.Title`, `@ach.Description`, `@ach.Points`, `@ach.RequirementType`, `@ach.RequirementValue`)">
+                                    <i class='bx bx-edit'></i>
+                                </button>
+
+                                <form method="post" asp-page-handler="Delete" asp-route-id="@ach.AchievementId" class="d-inline">
+                                    <button type="submit" class="deleteach"
+                                            onclick="return confirm('Are you sure you want to delete this achievement?')">
+                                        <i class='bx bx-x'></i>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    <script>
+        function toggleAchForm() {
+            const formDiv = document.getElementById('achForm');
+            const table = document.querySelector('.tableach');
+
+            formDiv.classList.toggle('d-none');
+            table.style.display = formDiv.classList.contains('d-none') ? '' : 'none';
+
+            if (!formDiv.classList.contains('d-none')) {
+                const form = formDiv.querySelector('form');
+                form.setAttribute('action', '?handler=Add');
+                form.querySelector('button').textContent = 'Save Achievement';
+                form.reset();
+            }
+        }
+
+        function populateEditAch(id, title, desc, points, reqType, reqValue) {
+            const formDiv = document.getElementById('achForm');
+            const table = document.querySelector('.tableach');
+
+            formDiv.classList.remove('d-none');
+            table.style.display = 'none';
+
+            const form = document.querySelector('#achForm form');
+            form.setAttribute('action', `?handler=Edit&id=${id}`);
+
+            document.querySelector('[name="Achievement.Title"]').value = title;
+            document.querySelector('[name="Achievement.Description"]').value = desc;
+            document.querySelector('[name="Achievement.Points"]').value = points;
+            document.querySelector('[name="Achievement.RequirementType"]').value = reqType;
+            document.querySelector('[name="Achievement.RequirementValue"]').value = reqValue;
+
+            form.querySelector('button').textContent = 'Save Changes';
+        }
+
+        function cancelAchForm() {
+            const formDiv = document.getElementById('achForm');
+            const table = document.querySelector('.tableach');
+
+            formDiv.classList.add('d-none');
+            table.style.display = '';
+
+            const form = formDiv.querySelector('form');
+            form.reset();
+            form.setAttribute('action', '?handler=Add');
+            form.querySelector('button').textContent = 'Save Achievement';
+        }
+    </script>
+}

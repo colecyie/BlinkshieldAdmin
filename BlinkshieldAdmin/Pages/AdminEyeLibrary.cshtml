@@ -1,0 +1,306 @@
+﻿@page
+@using BlinkshieldAdmin.Pages.Admin
+@model AdminEyeLibraryModel
+@{
+    ViewData["Title"] = "Eye Library Admin";
+}
+
+<div class="container">
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+    }
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+    }
+
+    <h1 class="mb-4">Eye Library Administration</h1>
+
+    <ul class="nav nav-tabs" id="eyeLibraryTabs" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" id="trivia-tab" data-toggle="tab" href="#trivia" role="tab">Eye Trivia</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="tips-tab" data-toggle="tab" href="#tips" role="tab">Eye Tips</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="issues-tab" data-toggle="tab" href="#issues" role="tab">Common Issues</a>
+        </li>
+    </ul>
+
+    <div class="tab-content p-3 border border-top-0 rounded-bottom">
+        <!-- Eye Trivia Tab -->
+        <div class="tab-pane fade show active" id="trivia" role="tabpanel">
+            <h3>Eye Trivia</h3>
+            <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#addTriviaModal">
+                Add New Trivia
+            </button>
+
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Description</th>
+                            <th>Link</th>
+                            <th>Created At</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var trivia in Model.TriviaList)
+                        {
+                            <tr>
+                                <td>@trivia.Title</td>
+                                <td>@trivia.Description</td>
+                                <td>
+                                    @if (!string.IsNullOrEmpty(trivia.Link))
+                                    {
+                                        <a href="@trivia.Link" target="_blank">View Link</a>
+                                    }
+                                </td>
+                                <td>@trivia.CreatedAt.ToString("g")</td>
+                                <td>
+                                    <button class="btn btn-sm btn-warning">Edit</button>
+                                    <button class="btn btn-sm btn-danger">Delete</button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Eye Tips Tab -->
+        <div class="tab-pane fade" id="tips" role="tabpanel">
+            <h3>Eye Tips</h3>
+            <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#addTipModal">
+                Add New Tip
+            </button>
+
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Content</th>
+                            <th>Link</th>
+                            <th>Created At</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var tip in Model.TipsList)
+                        {
+                            <tr>
+                                <td>@tip.Title</td>
+                                <td>@tip.Content</td>
+                                <td>
+                                    @if (!string.IsNullOrEmpty(tip.Link))
+                                    {
+                                        <a href="@tip.Link" target="_blank">View Link</a>
+                                    }
+                                </td>
+                                <td>@tip.CreatedAt.ToString("g")</td>
+                                <td>
+                                    <button class="btn btn-sm btn-warning">Edit</button>
+                                    <button class="btn btn-sm btn-danger">Delete</button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Common Issues Tab -->
+        <div class="tab-pane fade" id="issues" role="tabpanel">
+            <h3>Common Eye Issues</h3>
+            <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#addIssueModal">
+                Add New Issue
+            </button>
+
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Description</th>
+                            <th>Suggested Action</th>
+                            <th>Link</th>
+                            <th>Created At</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var issue in Model.IssuesList)
+                        {
+                            <tr>
+                                <td>@issue.Title</td>
+                                <td>@issue.Description</td>
+                                <td>@issue.SuggestedAction</td>
+                                <td>
+                                    @if (!string.IsNullOrEmpty(issue.Link))
+                                    {
+                                        <a href="@issue.Link" target="_blank">View Link</a>
+                                    }
+                                </td>
+                                <td>@issue.CreatedAt.ToString("g")</td>
+                                <td>
+                                    <button class="btn btn-sm btn-warning">Edit</button>
+                                    <button class="btn btn-sm btn-danger">Delete</button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add Trivia Modal -->
+<div class="modal fade" id="addTriviaModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Add New Eye Trivia</h5>
+                <button type="button" class="close" data-dismiss="modal">
+                    <span>&times;</span>
+                </button>
+            </div>
+            <form method="post" asp-page-handler="AddTrivia">
+                @Html.AntiForgeryToken()
+                <div class="modal-body">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="NewTrivia.Title"></label>
+                        <input asp-for="NewTrivia.Title" class="form-control" maxlength="255" />
+                        <span asp-validation-for="NewTrivia.Title" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="NewTrivia.Description"></label>
+                        <textarea asp-for="NewTrivia.Description" class="form-control" rows="3"></textarea>
+                        <span asp-validation-for="NewTrivia.Description" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="NewTrivia.Link"></label>
+                        <input asp-for="NewTrivia.Link" class="form-control" maxlength="500" />
+                        <span asp-validation-for="NewTrivia.Link" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save Trivia</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Add Tip Modal -->
+<div class="modal fade" id="addTipModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Add New Eye Tip</h5>
+                <button type="button" class="close" data-dismiss="modal">
+                    <span>&times;</span>
+                </button>
+            </div>
+            <form method="post" asp-page-handler="AddTip">
+                @Html.AntiForgeryToken()
+                <div class="modal-body">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="NewTip.Title"></label>
+                        <input asp-for="NewTip.Title" class="form-control" maxlength="150" />
+                        <span asp-validation-for="NewTip.Title" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="NewTip.Content"></label>
+                        <textarea asp-for="NewTip.Content" class="form-control" rows="3"></textarea>
+                        <span asp-validation-for="NewTip.Content" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="NewTip.Link"></label>
+                        <input asp-for="NewTip.Link" class="form-control" />
+                        <span asp-validation-for="NewTip.Link" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save Tip</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Add Issue Modal -->
+<div class="modal fade" id="addIssueModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Add New Common Issue</h5>
+                <button type="button" class="close" data-dismiss="modal">
+                    <span>&times;</span>
+                </button>
+            </div>
+            <form method="post" asp-page-handler="AddIssue">
+                @Html.AntiForgeryToken()
+                <div class="modal-body">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="NewIssue.Title"></label>
+                        <input asp-for="NewIssue.Title" class="form-control" maxlength="100" />
+                        <span asp-validation-for="NewIssue.Title" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="NewIssue.Description"></label>
+                        <textarea asp-for="NewIssue.Description" class="form-control" rows="3"></textarea>
+                        <span asp-validation-for="NewIssue.Description" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="NewIssue.SuggestedAction"></label>
+                        <textarea asp-for="NewIssue.SuggestedAction" class="form-control" rows="3"></textarea>
+                        <span asp-validation-for="NewIssue.SuggestedAction" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="NewIssue.Link"></label>
+                        <input asp-for="NewIssue.Link" class="form-control" maxlength="255" />
+                        <span asp-validation-for="NewIssue.Link" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save Issue</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        $(document).ready(function() {
+            // Clear form fields when modal is hidden
+            $('#addTriviaModal').on('hidden.bs.modal', function() {
+                $(this).find('form')[0].reset();
+                $(this).find('.text-danger').text('');
+            });
+
+            $('#addTipModal').on('hidden.bs.modal', function() {
+                $(this).find('form')[0].reset();
+                $(this).find('.text-danger').text('');
+            });
+
+            $('#addIssueModal').on('hidden.bs.modal', function() {
+                $(this).find('form')[0].reset();
+                $(this).find('.text-danger').text('');
+            });
+        });
+    </script>
+}

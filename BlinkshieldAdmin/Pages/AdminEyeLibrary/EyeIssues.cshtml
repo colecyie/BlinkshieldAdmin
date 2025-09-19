@@ -1,0 +1,145 @@
+﻿@page
+@model BlinkshieldAdmin.Pages.AdminEyeLibrary.EyeIssuesModel
+@{
+    ViewData["Title"] = "Eye Issues";
+}
+
+<link rel="stylesheet" href="~/css/EyeIssues.css" asp-append-version="true" />
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <button class="addissue" onclick="toggleIssueForm()">Add New Issue</button>
+
+    <form method="get" class="search-form">
+        <div class="search-container">
+            <span class="search-icon">🔍</span>
+            <input type="text" name="SearchTerm" placeholder="Search Eye Tips..." value="@Model.SearchTerm" />
+        </div>
+    </form>
+</div>
+
+<partial name="_EyeLibraryTabs" />
+
+<div class="eyeissue">
+    <div id="issueForm" class="d-none">
+        <form method="post" asp-page-handler="AddIssue">
+            <div class="form-issue">
+                <label>Title*</label>
+                <input type="text" class="form-control" name="NewIssue.Title" maxlength="100" required />
+            </div>
+            <div class="form-issue">
+                <label>Description*</label>
+                <textarea class="form-control" name="NewIssue.Description" rows="3" required></textarea>
+            </div>
+            <div class="form-issue">
+                <label>Suggested Action (optional)</label>
+                <textarea class="form-control" name="NewIssue.SuggestedAction" rows="3"></textarea>
+            </div>
+            <div class="form-issue">
+                <label>Link (optional)</label>
+                <input type="url" class="form-control" name="NewIssue.Link" maxlength="255" />
+            </div>
+            <div class="cancel">
+                <button type="submit" class="saveissue">Save Issue</button>
+                <button type="button" class="cancelissue" onclick="cancelIssueForm()">Cancel</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="tableissue">
+        <table class="issuetable">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Suggested Action</th>
+                    <th>Link</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var issue in Model.IssuesList)
+                {
+                    <tr>
+                        <td>@issue.Title</td>
+                        <td>@issue.Description</td>
+                        <td>@issue.SuggestedAction</td>
+                        <td>
+                            @if (!string.IsNullOrEmpty(issue.Link))
+                            {
+                                <a href="@issue.Link" target="_blank" class="viewi">Blinky's Issue Source</a>
+                            }
+                        </td>
+                        <td>
+                            <button type="button" class="editi"
+                                    onclick="populateEditIssue('@issue.IssueId', `@issue.Title`, `@issue.Description`, `@issue.SuggestedAction`, `@issue.Link`)">
+                                <i class='bx bx-edit'></i>
+                            </button>
+                            <form method="post" asp-page-handler="DeleteIssue" asp-route-id="@issue.IssueId" class="d-inline">
+                                <button type="submit" class="deletei"
+                                        onclick="return confirm('Are you sure you want to delete this tip?')">
+                                    <i class='bx bx-x'></i>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function toggleIssueForm() {
+            const formDiv = document.getElementById('issueForm');
+            const tableDiv = document.querySelector('.tableissue');
+
+            formDiv.classList.toggle('d-none');
+
+            if (!formDiv.classList.contains('d-none')) {
+                // Hide table when form is open
+                tableDiv.classList.add('d-none');
+
+                // Reset to Add Mode when showing form
+                const form = document.querySelector('#issueForm form');
+                form.setAttribute('action', `?handler=AddIssue`);
+                form.querySelector('button[type="submit"]').textContent = 'Save Issue';
+                form.reset();
+            } else {
+                // Show table when form is hidden
+                tableDiv.classList.remove('d-none');
+            }
+        }
+
+        function populateEditIssue(id, title, description, suggestedAction, link) {
+            const formDiv = document.getElementById('issueForm');
+            const tableDiv = document.querySelector('.tableissue');
+
+            formDiv.classList.remove('d-none');
+            tableDiv.classList.add('d-none'); // Hide table when editing
+
+            const form = document.querySelector('#issueForm form');
+            form.setAttribute('action', `?handler=EditIssue&id=${id}`);
+
+            document.querySelector('[name="NewIssue.Title"]').value = title;
+            document.querySelector('[name="NewIssue.Description"]').value = description;
+            document.querySelector('[name="NewIssue.SuggestedAction"]').value = suggestedAction;
+            document.querySelector('[name="NewIssue.Link"]').value = link;
+
+            form.querySelector('button[type="submit"]').textContent = 'Save Changes';
+        }
+
+        function cancelIssueForm() {
+            const formDiv = document.getElementById('issueForm');
+            const tableDiv = document.querySelector('.tableissue');
+
+            formDiv.classList.add('d-none');
+            tableDiv.classList.remove('d-none'); // Show table again
+
+            const form = document.querySelector('#issueForm form');
+            form.reset();
+            form.setAttribute('action', `?handler=AddIssue`);
+            form.querySelector('button[type="submit"]').textContent = 'Save Issue';
+        }
+    </script>
+}

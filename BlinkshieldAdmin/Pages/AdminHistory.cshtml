@@ -1,0 +1,48 @@
+﻿@page
+@model BlinkshieldAdmin.Pages.AdminHistoryModel
+@{
+    ViewData["Title"] = "Admin History";
+}
+
+
+<!-- Sort Bar -->
+<form method="get">
+    <div class="sorthis">
+        <label for="sorthistory">Sort by Action:</label>
+        <select id="sorthistory" asp-for="SelectedAction" asp-items="Model.ActionOptions"
+                onchange="this.form.submit()">
+            <option value="">All</option>
+        </select>
+    </div>
+
+    <div class="sorthis">
+        <label for="sortCategory">Sort by Category:</label>
+        <select id="sortCategory" asp-for="SelectedCategory" asp-items="Model.CategoryOptions"
+                onchange="this.form.submit()">
+            <option value="">All</option>
+        </select>
+    </div>
+</form>
+
+<div class="history">
+
+    <table class="tablehis">
+        <thead>
+            <tr>
+                <th>Action</th>
+                <th>Description</th>
+                <th>Created At</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.History)
+            {
+                <tr>
+                    <td>@item.Action</td>
+                    <td>@Html.Raw(item.Description)</td>
+                    <td>@item.CreatedAt.ToString("yyyy-MM-dd HH:mm")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

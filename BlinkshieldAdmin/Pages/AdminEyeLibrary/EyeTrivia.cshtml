@@ -1,0 +1,126 @@
+﻿@page
+@model BlinkshieldAdmin.Pages.AdminEyeLibrary.EyeTriviaModel
+@{
+    ViewData["Title"] = "Eye Trivia";
+}
+
+<link rel="stylesheet" href="~/css/EyeTrivia.css" asp-append-version="true" />
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <button class="addtriv" onclick="toggleForm()">Add New Trivia</button>
+
+    <form method="get" class="search-form">
+        <div class="search-container">
+            <span class="search-icon">🔍</span>
+            <input type="text" name="SearchTerm" placeholder="Search..." value="@Model.SearchTerm" />
+        </div>
+    </form>
+
+</div>
+
+<partial name="_EyeLibraryTabs" />
+<div class="eyetrivia">
+
+<div id="triviaForm" class="d-none">
+    <form method="post">
+        <div class="form-triv">
+            <label>Title*</label>
+            <input asp-for="NewTrivia.Title" class="form-control" required />
+        </div>
+        <div class="form-triv">
+            <label>Description*</label>
+            <textarea asp-for="NewTrivia.Description" class="form-control" required></textarea>
+        </div>
+        <div class="form-triv">
+            <label>Link (optional)</label>
+            <input asp-for="NewTrivia.Link" class="form-control" />
+        </div>
+        <button type="submit" class="addedtriv"> Add Trivia </button>
+            <button type="button" class="canceltriv" onclick="cancelTriviaForm()">Cancel</button>
+    </form>
+</div>
+
+<table class="eyetriv">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Link</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var t in Model.TriviaList)
+        {
+            <tr>
+                <td>@t.Title</td>
+                <td>@t.Description</td>
+                <td>
+                    @if (!string.IsNullOrWhiteSpace(t.Link))
+                    {
+                        <a href="@t.Link" target="_blank" class="viewtriv">Blinky's source</a>
+                    }
+                </td>
+                <td>
+                    <!-- Edit (just populates form for now) -->
+                    <button type="button" class="edittriv"
+                            onclick="populateEditForm('@t.TriviaId', `@t.Title`, `@t.Description`, `@t.Link`)">
+                        <i class='bx bx-edit'></i>
+                    </button>
+
+                    <!-- Delete -->
+                    <form method="post" asp-page-handler="DeleteTrivia" asp-route-id="@t.TriviaId" class="d-inline">
+                        <button type="submit" class="deletetriv"
+                                onclick="return confirm('Are you sure you want to delete this trivia?')">
+                            <i class='bx bx-x'></i>
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+</div>
+
+@section Scripts {
+    <script>
+                function toggleForm() {
+            const formDiv = document.getElementById('triviaForm');
+            const table = document.querySelector('.eyetriv'); // get table
+
+            const isHidden = formDiv.classList.contains('d-none');
+
+            // Show form, hide table
+            formDiv.classList.toggle('d-none');
+            table.style.display = isHidden ? 'none' : ''; // hide when form is shown
+        }
+
+        function populateEditForm(id, title, description, link) {
+            const formDiv = document.getElementById('triviaForm');
+            const table = document.querySelector('.eyetriv');
+
+            formDiv.classList.remove('d-none');
+            table.style.display = 'none'; // always hide table when editing
+
+            const form = formDiv.querySelector('form');
+            form.setAttribute('action', `?handler=EditTrivia&id=${id}`);
+            document.querySelector('[name="NewTrivia.Title"]').value = title;
+            document.querySelector('[name="NewTrivia.Description"]').value = description;
+            document.querySelector('[name="NewTrivia.Link"]').value = link;
+            form.querySelector('button').textContent = 'Save Changes';
+        }
+
+        function cancelTriviaForm() {
+            const formDiv = document.getElementById('triviaForm');
+            const table = document.querySelector('.eyetriv');
+
+            formDiv.classList.add('d-none'); // hide the form
+            table.style.display = ''; // show table back
+
+            const form = formDiv.querySelector('form');
+            form.reset(); // clear inputs
+            form.removeAttribute('action'); // reset action
+            form.querySelector('button').textContent = 'Add Trivia'; // restore button label
+        }
+    </script>
+}

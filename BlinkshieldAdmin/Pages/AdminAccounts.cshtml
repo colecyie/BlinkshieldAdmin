@@ -1,0 +1,50 @@
+﻿@page
+@model BlinkshieldAdmin.Pages.AdminAccountsModel
+@{
+    ViewData["Title"] = "Admin Dashboard";
+}
+
+<div class="main-content">
+    <div class="header">
+        <span class="greeting">Hi, Admin!</span>
+        <div class="search-bar">
+            <input type="text" placeholder="Search..." />
+            <button>🔍</button>
+        </div>
+    </div>
+
+    <div class="accounts">
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th rowspan="2">Account ID</th>
+                        <th rowspan="2">Nickname</th>
+                        <th rowspan="2">Email</th>
+                        <th rowspan="2">Points</th>
+                        <th colspan="3">Overview</th>
+                    </tr>
+                    <tr>
+                        <th>Screentime</th>
+                        <th>Breaks taken</th>
+                        <th>Health Score</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var account in Model.Accounts)
+                    {
+                        <tr>
+                            <td>@account.AccountId</td>
+                            <td>@account.Nickname</td>
+                            <td>@account.Email</td>
+                            <td>@account.Points</td>
+                            <td>@account.ScreenTimeMinutes</td>
+                            <td>@account.BreaksTaken</td>
+                            <td>@account.HealthScore</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

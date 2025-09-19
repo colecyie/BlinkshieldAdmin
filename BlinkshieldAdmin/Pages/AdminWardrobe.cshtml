@@ -1,0 +1,87 @@
+﻿@page
+@model BlinkshieldAdmin.Pages.AdminWardrobeModel
+@{
+    ViewData["Title"] = "Wardrobe Management";
+}
+
+<div class="wardrobe-header">
+    <!-- Add New Item Button -->
+    <a asp-page="AddWardrobeItem" class="addward">➕ Add New Item</a>
+
+    <!-- Search Form -->
+    <form method="get" class="search-form">
+        <div class="search-container">
+            <span class="search-icon">🔍</span>
+            <input type="text" name="SearchTerm" placeholder="Search..." value="@Model.SearchTerm" />
+        </div>
+    </form>
+</div>
+
+<!-- Success message -->
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">@TempData["Success"]</div>
+}
+
+<div class="wardrobe">
+    <!-- Wardrobe Items Table -->
+    <table class="wardrobe-table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Price</th>
+                <th>Image</th>
+                <th>Description</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Items != null && Model.Items.Any())
+            {
+                foreach (var item in Model.Items)
+                {
+                    <tr>
+                        <td>@item.Name</td>
+                        <td>@item.Type</td>
+                        <td>@item.Price.ToString("C")</td>
+                        <td>
+                            @if (item.Image != null && item.Image.Length > 0)
+                            {
+                                <img src="data:image/png;base64,@Convert.ToBase64String(item.Image)"
+                                     alt="@item.Name"
+                                     style="width:50px;height:50px;object-fit:cover;border-radius:5px;" />
+                            }
+                            else
+                            {
+                                <span class="text-muted">No Image</span>
+                            }
+                        </td>
+                        <td>@item.Description</td>
+                        <td>
+                            <!-- Edit Button -->
+                            <a asp-page="EditWardrobeItem" asp-route-id="@item.ItemId" class="editward">
+                                <i class='bx bx-edit'></i>
+                            </a>
+
+
+                            <!-- Delete Button -->
+                            <form method="post" asp-page-handler="Delete" asp-route-id="@item.ItemId" class="d-inline">
+                                <button type="submit" class="deleteward"
+                                        onclick="return confirm('Are you sure you want to delete this item?')">
+                                    <i class='bx bx-x'></i>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="6" class="text-center">No wardrobe items found.</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,50 @@
+﻿@page
+@model BlinkshieldAdmin.Pages.AddAchievementModel
+@{
+    ViewData["Title"] = "Add Achievement";
+}
+
+<link rel="stylesheet" href="~/css/adminAchievements.css" />
+
+<section class="achievement-form-page">
+    <h2 class="form-title">Add Achievement</h2>
+
+    <form method="post" class="achievement-form">
+        <div class="form-group">
+            <label asp-for="Achievement.Title" class="form-label">Title</label>
+            <input asp-for="Achievement.Title" class="form-input" />
+            <span asp-validation-for="Achievement.Title" class="text-danger small"></span>
+        </div>
+
+        <div class="form-ach">
+            <label asp-for="Achievement.Description" class="form-label">Description</label>
+            <textarea asp-for="Achievement.Description" class="form-input textarea-input"></textarea>
+            <span asp-validation-for="Achievement.Description" class="text-danger small"></span>
+        </div>
+
+        <div class="form-ach">
+            <label asp-for="Achievement.Points" class="form-label">Points</label>
+            <input asp-for="Achievement.Points" type="number" class="form-input" />
+            <span asp-validation-for="Achievement.Points" class="text-danger small"></span>
+        </div>
+
+        <!-- ✅ New Requirement Type -->
+        <div class="form-ach">
+            <label asp-for="Achievement.RequirementType" class="form-label">Requirement Type</label>
+            <input asp-for="Achievement.RequirementType" class="form-input" placeholder="e.g., games_played" />
+            <span asp-validation-for="Achievement.RequirementType" class="text-danger small"></span>
+        </div>
+
+        <!-- ✅ New Requirement Value -->
+        <div class="form-ach">
+            <label asp-for="Achievement.RequirementValue" class="form-label">Requirement Value</label>
+            <input asp-for="Achievement.RequirementValue" type="number" class="form-input" />
+            <span asp-validation-for="Achievement.RequirementValue" class="text-danger small"></span>
+        </div>
+
+        <div class="ach-buttons">
+            <button type="submit" class="addedach">➕ Add Achievement</button>
+            <a asp-page="/Achievements" class="cancel ach">Cancel</a>
+        </div>
+    </form>
+</section>

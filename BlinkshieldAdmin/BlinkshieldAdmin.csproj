@@ -1,0 +1,63 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="NewFolder1\**" />
+    <Compile Remove="NewFolder\**" />
+    <Compile Remove="wwwroot\NewFolder\**" />
+    <Content Remove="NewFolder1\**" />
+    <Content Remove="NewFolder\**" />
+    <Content Remove="wwwroot\NewFolder\**" />
+    <EmbeddedResource Remove="NewFolder1\**" />
+    <EmbeddedResource Remove="NewFolder\**" />
+    <EmbeddedResource Remove="wwwroot\NewFolder\**" />
+    <None Remove="NewFolder1\**" />
+    <None Remove="NewFolder\**" />
+    <None Remove="wwwroot\NewFolder\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Models\AdminAccounts.cs" />
+    <Compile Remove="Models\CommonIssue.cs" />
+    <Compile Remove="Pages\AddAchievement.cshtml.cs" />
+    <Compile Remove="Pages\AdminAccount.cshtml.cs" />
+    <Compile Remove="Pages\AdminDashboard.cshtml.cs" />
+    <Compile Remove="Pages\AdminEyeLibrary.cshtml.cs" />
+    <Compile Remove="Pages\DeleteAchievement.cshtml.cs" />
+    <Compile Remove="Pages\EditAchievement.cshtml.cs" />
+    <Compile Remove="Pages\ValuesController.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Pages\AddAchievement.cshtml" />
+    <Content Remove="Pages\AdminAccount.cshtml" />
+    <Content Remove="Pages\AdminDashboard.cshtml" />
+    <Content Remove="Pages\AdminEyeLibrary.cshtml" />
+    <Content Remove="Pages\DeleteAchievement.cshtml" />
+    <Content Remove="Pages\EditAchievement.cshtml" />
+    <Content Remove="wwwroot\css\StyleSheet.css" />
+  </ItemGroup>
+
+  <ItemGroup>
+  <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
+  <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="8.0.3" />
+
+  <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.7" />
+  <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.7">
+    <PrivateAssets>all</PrivateAssets>
+    <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+  </PackageReference>
+</ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="uploads\" />
+    <Folder Include="wwwroot\uploads\" />
+  </ItemGroup>
+
+</Project>

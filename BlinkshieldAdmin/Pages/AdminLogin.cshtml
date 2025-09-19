@@ -1,0 +1,57 @@
+﻿@page
+@model BlinkshieldAdmin.Pages.AdminLoginModel
+@{
+    ViewData["Title"] = "Admin Access";
+}
+
+<link rel="stylesheet" href="~/css/adminlogin.css" />
+
+<div class="login-container">
+    <div class="login-left">
+        <img src="~/images/blinky.png" alt="Blinky the cat" class="cat-image" />
+    </div>
+    <div class="login-right">
+        <h1>Hello, Blinky!!</h1>
+        <h2>Welcome to BlinkShield Admin Dashboard</h2>
+        <form method="post">
+            <div class="password-wrapper">
+                <div class="password-wrapper">
+                    <input type="password" name="Code" id="adminCodeInput" placeholder="ENTER YOUR ADMIN CODE...." class="admin-input" required />
+                    <button type="button" class="toggle-visibility" onclick="togglePasswordVisibility()">
+                        <svg id="eyeIcon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="gray" viewBox="0 0 640 512">
+                            <path d="M320 400c-36.89 0-70.63-12.9-97.67-34.43L73.49 5.47a16 16 0 00-22.63 0L5.47 50.34a16 16 0 000 22.63L151.8 219.3c-23.44 18.83-42.1 43.9-54.72 72C144.48 378.13 239.08 435.33 336 435.33c17.6 0 34.4-1.88 50.3-5.47L502.5 506.5a16 16 0 0022.63 0l45.37-44.87a16 16 0 000-22.63L320 400z" />
+                        </svg>
+                    </button>
+                </div>
+
+            </div>
+
+            <button type="submit" class="login-btn">LOG IN</button>
+        </form>
+        @if (Model.ErrorMessage != null)
+        {
+            <p class="error">@Model.ErrorMessage</p>
+        }
+    </div>
+</div>
+
+<script>
+    function togglePasswordVisibility() {
+        const input = document.getElementById("adminCodeInput");
+        const icon = document.getElementById("eyeIcon");
+
+        const eyeOpen = `<path d="M320 96C167.64 96 46.34 186.69 0 256c46.34 69.31 167.64 160 320 160s273.66-90.69 320-160c-46.34-69.31-167.64-160-320-160zm0 272a112 112 0 11112-112 112.13 112.13 0 01-112 112zm0-176a64 64 0 1064 64 64.07 64.07 0 00-64-64z"/>`;
+
+        const eyeSlash = `<path d="M320 400c-36.89 0-70.63-12.9-97.67-34.43L73.49 5.47a16 16 0 00-22.63 0L5.47 50.34a16 16 0 000 22.63L151.8 219.3c-23.44 18.83-42.1 43.9-54.72 72C144.48 378.13 239.08 435.33 336 435.33c17.6 0 34.4-1.88 50.3-5.47L502.5 506.5a16 16 0 0022.63 0l45.37-44.87a16 16 0 000-22.63L320 400z"/>`;
+
+        if (input.type === "password") {
+            input.type = "text";
+            icon.innerHTML = eyeOpen;
+        } else {
+            input.type = "password";
+            icon.innerHTML = eyeSlash;
+        }
+    }
+</script>
+
+

@@ -1,0 +1,94 @@
+﻿@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - BlinkshieldAdmin</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/admindashboard.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/adminWardrobe.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/adminAchievements.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/BlinkshieldAdmin.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/adminfeedbacks.css" asp-append-version="true"/>
+
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+
+</head>
+<body>
+    @{
+        var requestPath = HttpContextAccessor.HttpContext?.Request.Path.Value ?? "";
+        var isAdminLoginPage = requestPath.Contains("AdminLogin", StringComparison.OrdinalIgnoreCase);
+        var isAdminLoggedIn = HttpContextAccessor.HttpContext?.Session.GetString("IsAdminLoggedIn") == "true";
+        var currentPage = ViewContext.RouteData.Values["page"]?.ToString()?.ToLower() ?? "";
+
+    }
+
+    @if (isAdminLoginPage)
+    {
+        <!-- Simple layout for login page -->
+        <div class="container mt-4">
+            <main role="main" class="pb-3">
+                @RenderBody()
+            </main>
+        </div>
+    }
+    else
+    {
+        <div class="wrapper">
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <div class="logo">
+                    <img src="~/images/logo.png" alt="Blinky Logo" class="blinky-logo" />
+                </div>
+                <ul class="sidebarmmenu">
+                    <li class="menu">
+                        <a class="menu1 @(requestPath.Contains("AdminAccounts") ? "active" : "")" asp-page="/AdminAccounts">ACCOUNTS</a>
+                    </li>
+                    <li class="menu">
+                        <a class="menu1 @(currentPage.StartsWith("/admineyelibrary") ? "active" : "")"
+                           asp-page="/AdminEyeLibrary/EyeTrivia">EYE LIBRARY</a>
+                    </li>
+                    <li class="menu">
+                        <a class="menu1 @(requestPath.Contains("Achievements") ? "active" : "")" asp-page="/Achievements">ACHIEVEMENTS</a>
+                    </li>
+                    <li class="menu">
+                        <a class="menu1 @(requestPath.Contains("Wardrobe") ? "active" : "")" asp-page="/AdminWardrobe">WARDROBE</a>
+                    </li>
+                    <li class="menu">
+                        <a class="menu1 @(requestPath.Contains("AdminHistory") ? "active" : "")" asp-page="/AdminHistory">ADMIN HISTORY</a>
+                    </li>
+                    <li class="menu">
+                        <a class="menu1 @(requestPath.Contains("Feedbacks") ? "active" : "")" asp-page="/AdminFeedbacks">FEEDBACKS</a>
+                    </li>
+                </ul>
+
+                @if (isAdminLoggedIn)
+                {
+                    <form method="post" asp-page="/AdminLogin" class="logout-form">
+                        <button type="submit" class="logout">Logout</button>
+                    </form>
+                }
+            </div>
+
+            <!-- Main Content -->
+            <div class="main-content">
+                <main role="main" class="p-4">
+                    @RenderBody()
+                </main>
+                
+            </div>
+        </div>
+    }
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

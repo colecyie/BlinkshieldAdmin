@@ -1,0 +1,57 @@
+﻿@page
+@model BlinkshieldAdmin.Pages.AddWardrobeItemModel
+@{
+    ViewData["Title"] = "Add Wardrobe Item";
+}
+
+<div class="wardrobe-form-container">
+    <h2 class="form-title">Add New Wardrobe Item</h2>
+
+    <form method="post" enctype="multipart/form-data" class="wardrobe-form">
+        <div class="form-group">
+            <label asp-for="Item.Name" class="form-label"></label>
+            <input asp-for="Item.Name" class="form-control wardrobe-input" />
+            <span asp-validation-for="Item.Name" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Item.Type" class="form-label"></label>
+            <select asp-for="Item.Type" class="form-control wardrobe-input">
+                <option value="">Select Type</option>
+                <option value="hat">Hat</option>
+                <option value="shirt">Shirt</option>
+                <option value="glasses">Glasses</option>
+                <option value="shoes">Shoes</option>
+                <option value="accessory">Accessory</option>
+            </select>
+            <span asp-validation-for="Item.Type" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Item.Price" class="form-label"></label>
+            <input asp-for="Item.Price" class="form-control wardrobe-input" type="number" step="0.01" />
+            <span asp-validation-for="Item.Price" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="ImageFile" class="form-label">Item Image</label>
+            <input asp-for="ImageFile" type="file" class="form-control-file wardrobe-input" accept="image/*" />
+            <span asp-validation-for="ImageFile" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Item.Description" class="form-label"></label>
+            <textarea asp-for="Item.Description" class="form-control wardrobe-input" rows="3"></textarea>
+            <span asp-validation-for="Item.Description" class="text-danger"></span>
+        </div>
+
+        <div class="form-buttons">
+            <button type="submit" class="addedward">➕ Add Item</button>
+            <a asp-page="/AdminWardrobe" class="cancelward">Cancel</a>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

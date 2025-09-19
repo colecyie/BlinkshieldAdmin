@@ -1,0 +1,151 @@
+﻿@page
+@model BlinkshieldAdmin.Pages.AdminEyeLibrary.EyeTipsModel
+@{
+    ViewData["Title"] = "Eye Tips";
+}
+
+<link rel="stylesheet" href="~/css/EyeTips.css" />
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <button class="addtip" onclick="toggleTipForm()">Add New Tip</button>
+
+    <form method="get" class="search-form">
+        <div class="search-container">
+            <span class="search-icon">🔍</span>
+            <input type="text" name="SearchTerm" placeholder="Search Eye Tips..." value="@Model.SearchTerm" />
+        </div>
+    </form>
+</div>
+
+<partial name="_EyeLibraryTabs" />
+<div class="eyetipss">
+
+    <div id="tipForm" class="d-none">
+        <form method="post" asp-page-handler="AddTip">
+            <div class="form-tip">
+                <label>Title*</label>
+                <input type="text" class="form-control" name="NewTip.Title" maxlength="150" required />
+            </div>
+            <div class="form-tip">
+                <label>Category*</label>
+                <select class="form-control" name="NewTip.Category" required>
+                    <option value="DryEyes">Dry eyes</option>
+                    <option value="BlurryVisionNear">Blurry vision (near)</option>
+                    <option value="BlurryVisionFar">Blurry vision (far)</option>
+                    <option value="BlurryVisionBoth">Blurry vision (both)</option>
+                    <option value="HeadacheMild">Headache (mild)</option>
+                    <option value="HeadacheModerate">Headache (moderate)</option>
+                    <option value="HeadacheSevere">Headache (severe)</option>
+                    <option value="Dizziness">Dizziness</option>
+                    <option value="Glare">Glare</option>
+                </select>
+            </div>
+
+
+            <div class="form-tip">
+                <label>Content*</label>
+                <textarea class="form-control" name="NewTip.Content" rows="3" required></textarea>
+            </div>
+
+            <div class="form-tip">
+                <label>Link (optional)</label>
+                <input type="url" class="form-control" name="NewTip.Link" />
+            </div>
+
+            <button type="submit" class="addedtip">Save Tip</button>
+            <button type="button" class="canceltip" onclick="cancelTipForm()">Cancel</button>
+        </form>
+    </div>
+
+    <table class="tabletip">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Category</th>
+                <th>Content</th>
+                <th>Link</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var tip in Model.TipsList)
+            {
+                <tr>
+                    <td>@tip.Title</td>
+                    <td>@tip.Category</td>
+                    <td>@tip.Content</td>
+                    <td>
+                        @if (!string.IsNullOrEmpty(tip.Link))
+                        {
+                            <a href="@tip.Link" target="_blank" class="viewtips">Blinky's Tip Source</a>
+                        }
+                    </td>
+                    <td>
+                        <button type="button" class="edittip"
+                                onclick="populateEditTip('@tip.TipId', `@tip.Title`, `@tip.Content`, `@tip.Link`, `@tip.Category`)">
+                            <i class='bx bx-edit'></i>
+                        </button>
+
+                        <form method="post" asp-page-handler="DeleteTip" asp-route-id="@tip.TipId" class="d-inline">
+                            <button type="submit" class="deletetip"
+                                    onclick="return confirm('Are you sure you want to delete this tip?')">
+                                <i class='bx bx-x'></i>
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@section Scripts {
+    <script>
+        function toggleTipForm() {
+            const formDiv = document.getElementById('tipForm');
+            const table = document.querySelector('.tabletip');
+
+            formDiv.classList.toggle('d-none');
+            table.style.display = formDiv.classList.contains('d-none') ? '' : 'none';
+
+            // Reset form for Add mode
+            if (!formDiv.classList.contains('d-none')) {
+                const form = formDiv.querySelector('form');
+                form.setAttribute('action', '?handler=AddTip');
+                form.querySelector('button').textContent = 'Save Tip';
+                form.reset();
+            }
+        }
+
+        function populateEditTip(id, title, content, link, category) {
+            const formDiv = document.getElementById('tipForm');
+            const table = document.querySelector('.tabletip');
+
+            formDiv.classList.remove('d-none');
+            table.style.display = 'none';
+
+            const form = document.querySelector('#tipForm form');
+            form.setAttribute('action', `?handler=EditTip&id=${id}`);
+
+            document.querySelector('[name="NewTip.Title"]').value = title;
+            document.querySelector('[name="NewTip.Content"]').value = content;
+            document.querySelector('[name="NewTip.Link"]').value = link || '';
+            document.querySelector('[name="NewTip.Category"]').value = category;
+
+            form.querySelector('button').textContent = 'Save Changes';
+        }
+
+        function cancelTipForm() {
+            const formDiv = document.getElementById('tipForm');
+            const table = document.querySelector('.tabletip');
+
+            formDiv.classList.add('d-none');
+            table.style.display = '';
+
+            const form = formDiv.querySelector('form');
+            form.reset();
+            form.setAttribute('action', '?handler=AddTip');
+            form.querySelector('button').textContent = 'Save Tip';
+        }
+    </script>
+}

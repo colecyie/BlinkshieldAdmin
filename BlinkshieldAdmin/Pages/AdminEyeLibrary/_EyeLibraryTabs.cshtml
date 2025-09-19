@@ -1,0 +1,26 @@
+﻿@{
+    string currentPath = Context.Request.Path;
+}
+
+@{
+    var currentPage = ViewContext.RouteData.Values["page"]?.ToString()?.ToLower() ?? "";
+}
+
+<div class="mb-4">
+    <ul class="eyelibrary">
+        <li class="eyelib">
+            <a class="eyelibra @(currentPage.Contains("/admineyelibrary/eyetrivia") ? "active" : "")"
+               asp-page="/AdminEyeLibrary/EyeTrivia">Trivia</a>
+        </li>
+        <li class="eyelib">
+            <a class="eyelibra @(currentPage.Contains("/admineyelibrary/eyetips") ? "active" : "")"
+               asp-page="/AdminEyeLibrary/EyeTips">Tips</a>
+        </li>
+        <li class="eyelib">
+            <a class="eyelibra @(currentPage.Contains("/admineyelibrary/eyeissues") ? "active" : "")"
+               asp-page="/AdminEyeLibrary/EyeIssues">Common Issues</a>
+        </li>
+    </ul>
+</div>
+
+

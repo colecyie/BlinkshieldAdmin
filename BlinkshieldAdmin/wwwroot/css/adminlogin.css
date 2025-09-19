@@ -1,0 +1,126 @@
+﻿/* General page style */
+body {
+    margin: 0;
+    font-family: 'Comic Sans MS', 'Poppins', sans-serif;
+    background: url('/images/adminbg.png') no-repeat center center fixed;
+    background-size: cover;
+}
+
+/* Container for left (cat) + right (form) */
+.login-container {
+    display: flex;
+    min-height: 100vh;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    gap: 40px;
+}
+
+/* Left side: Cat image */
+.login-left {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cat-image {
+    width: 300px;
+    max-width: 90%;
+}
+
+/* Right side: Titles + form */
+.login-right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #4b4b00;
+    padding: 20px;
+}
+
+    .login-right h1 {
+        font-size: 36px;
+        font-weight: bold;
+        margin: 0 0 10px 0;
+    }
+
+    .login-right h2 {
+        font-size: 24px;
+        font-weight: bold;
+        margin: 10px 0 30px 0;
+        color: #a33c6b;
+    }
+
+/* Form */
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 400px;
+    gap: 15px;
+}
+
+/* Input wrapper for admin code */
+.password-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+    .password-wrapper input.admin-input {
+        width: 100%;
+        padding: 12px 45px 12px 12px;
+        border-radius: 20px;
+        border: none;
+        text-align: center;
+        color: hotpink;
+        font-weight: bold;
+        font-family: 'Comic Sans MS', 'Poppins', sans-serif;
+        box-sizing: border-box;
+        outline: none;
+    }
+
+/* Toggle eye icon */
+.toggle-visibility {
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: gray;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Login button */
+.login-btn {
+    background-color: #ffe1f0;
+    color: #4b4b00;
+    font-weight: bold;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 14px;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+    min-width: 150px; /* smaller than input */
+    text-align: center;
+}
+
+    .login-btn:hover {
+        background-color: #ffcadf;
+    }
+
+/* Error message */
+.error {
+    color: red;
+    margin-top: 10px;
+    font-size: 14px;
+}
