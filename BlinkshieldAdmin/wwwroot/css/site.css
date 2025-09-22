@@ -36,40 +36,6 @@ body {
 }
 
 
-/* Sidebar menu */
-ul.sidebarmmenu {
-    padding: 0;
-    margin: 0;
-    list-style: none;
-    width: 100%;
-}
-
-    ul.sidebarmmenu .menu {
-        margin-bottom: 16px;
-    }
-
-    ul.sidebarmmenu .menu1 {
-        display: block;
-        padding: 12px 20px;
-        border-radius: 25px;
-        font-weight: 600;
-        font-size: 1rem;
-        color: #fff;
-        text-decoration: none;
-        text-align: center;
-        transition: all 0.3s ease;
-    }
-
-        ul.sidebarmmenu .menu1:hover {
-            background-color: #ff69b4;
-            color: #fff;
-        }
-
-        ul.sidebarmmenu .menu1.active {
-            background-color: #fff;
-            color: #ff69b4;
-        }
-
 /* Logout button pinned at bottom */
 .logout-form {
     margin-top: auto;
@@ -229,12 +195,20 @@ footer {
         transition: background-color 0.2s;
     }
 
-/* Sort section container */
+
+/* Parent container for both sort blocks */
+.sort-wrapper {
+    display: flex;
+    gap: 40px; /* space between Action and Category */
+    flex-wrap: wrap; /* auto stack on small screens */
+    align-items: flex-end;
+    margin-bottom: 20px;
+}
+
+/* Each sort block */
 .sorthis {
-    display: inline-flex;
-    flex-direction: column;
-    margin-right: 20px;
-    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column; /* label on top of select */
     font-family: 'Cooper', sans-serif;
 }
 
@@ -261,15 +235,768 @@ footer {
         box-shadow: 0 2px 5px rgba(255, 105, 180, 0.15);
     }
 
-        /* Hover & focus effect */
         .sorthis select:hover,
         .sorthis select:focus {
             background-color: #f8cce5;
             border-color: #ff69b4;
         }
 
-/* Apply button */
-.applysort {
+
+
+    /*sidebars*/
+ul.sidebarmenu {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    width: 100%;
+}
+
+    ul.sidebarmenu .menu {
+        margin-bottom: 16px;
+    }
+
+    ul.sidebarmenu .menu1 {
+        display: block;
+        padding: 12px 20px;
+        border-radius: 25px;
+        font-weight: 600;
+        font-size: 1rem;
+        color: #fff;
+        text-decoration: none;
+        text-align: center;
+        transition: all 0.3s ease;
+    }
+
+        ul.sidebarmenu .menu1:hover {
+            background-color: #ff69b4;
+            color: #fff;
+        }
+
+        ul.sidebarmenu .menu1.active {
+            background-color: #fff;
+            color: #ff69b4;
+        }
+
+
+
+
+/* --- (keep going if may achievements/wardrobe styles ka pa) --- */
+
+/*ADMIN ACCOUNT*/
+.accounts {
+    background-color: #ffe4ec;
+    border-radius: 20px;
+    padding: 20px;
+    height: 80vh;
+    width: 100%; /* responsive instead of fixed vh */
+    max-width: 100%;
+    box-shadow: 0 4px 12px rgba(255, 105, 180, 0.15);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* avoid double scrollbars */
+    scrollbar-width: thin;
+    scrollbar-color: #ffb6c1 #ffe4ec;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 25px;
+    overflow: hidden;
+}
+
+    .search-bar input {
+        border: none;
+        padding: 8px 12px;
+        outline: none;
+        font-size: 14px;
+    }
+
+    .search-bar button {
+        background: none;
+        border: none;
+        font-size: 16px;
+        padding: 8px 12px;
+        cursor: pointer;
+    }
+
+.table-container {
+    flex: 1;
+    overflow-x: auto; /* horizontal scrolling */
+    overflow-y: auto; /* vertical scrolling */
+    border-radius: 15px;
+    background: white;
+    box-shadow: 0px 2px 8px rgba(255, 182, 193, 0.3);
+}
+
+    .table-container table {
+        min-width: 800px; /* triggers horizontal scroll if too many columns */
+        width: 100%;
+        border-collapse: collapse;
+        text-align: center;
+    }
+
+    .table-container thead tr:first-child {
+        background-color: #f9aebc;
+    }
+
+    .table-container thead tr:nth-child(2) {
+        background-color: #fbc5cc;
+    }
+
+    .table-container th,
+    .table-container td {
+        padding: 12px;
+        border: 1px solid #f89bab;
+        font-size: 14px;
+    }
+
+    .table-container tbody td {
+        height: 50px;
+        background-color: #ffe6ea;
+    }
+
+    /* Sticky header */
+    .table-container thead th {
+        position: sticky;
+        top: 0;
+        z-index: 2;
+    }
+/* eye trivia*/
+
+/* Main bubble styling */
+
+
+.eyetrivia {
+    background-color: #ffe4ec; /* soft pink bubble */
+    border-radius: 20px;
+    padding: 20px;
+    height: 80vh; /* fixed height for the bubble */
+    overflow-y: auto; /* internal scroll */
+    box-shadow: 0 4px 12px rgba(255, 105, 180, 0.15);
+    display: flex;
+    flex-direction: column;
+    scrollbar-width: thin;
+    scrollbar-color: #ffb6c1 #ffe4ec;
+}
+
+    .eyetrivia::-webkit-scrollbar-track {
+        background: #ffe4ec;
+        border-radius: 10px;
+    }
+
+    .eyetrivia::-webkit-scrollbar-thumb {
+        background-color: #ffb6c1;
+        border-radius: 10px;
+    }
+
+        .eyetrivia::-webkit-scrollbar-thumb:hover {
+            background-color: #ff69b4;
+        }
+
+    /* Title styling */
+    .eyetrivia h2 {
+        font-family: Cooper;
+        text-align: center;
+        color: #ff69b4;
+        margin-bottom: 15px;
+        text-shadow: 1px 1px 2px rgba(255, 105, 180, 0.3);
+    }
+
+/* Header section (Add + Search) */
+.eyetrivia-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+/* Add trivia button */
+.addtriv {
+    background-color: #ffb6c1;
+    color: #fff;
+    padding: 8px 15px;
+    border-radius: 15px;
+    border: none;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.2s;
+}
+
+    .addtriv:hover {
+        background-color: #ff69b4;
+    }
+
+.search-form {
+    max-width: 300px;
+    width: 100%;
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+    background: #fff;
+    border-radius: 15px;
+    padding: 5px 10px;
+    box-shadow: 0 2px 5px rgba(255, 105, 180, 0.15);
+    margin-left: 70px;
+}
+
+.search-icon {
+    color: #ff69b4;
+    font-size: 14px;
+    margin-right: 8px;
+}
+
+.search-container input {
+    border: none;
+    outline: none;
+    flex: 1;
+    font-size: 14px;
+    background: transparent;
+}
+
+
+
+
+/* Table styling */
+.eyetriv {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 15px;
+    background: #fff;
+    overflow: hidden;
+    border: 1px solid #f8c6d8;
+}
+
+    .eyetriv th,
+    .eyetriv td {
+        padding: 10px;
+        text-align: left;
+    }
+
+    .eyetriv th {
+        text-align: center;
+        background-color: #ffb6c1;
+        color: #fff;
+    }
+
+/* Removed hover effect */
+.eyetriv-table tr:hover {
+    background-color: transparent;
+}
+
+/* Action buttons */
+.edittriv, .deletetriv {
+    border: none;
+    padding: 6px 10px;
+    border-radius: 50%;
+    font-size: 16px;
+    cursor: pointer;
+    margin: 0 3px;
+    transition: background-color 0.2s;
+}
+
+.edittriv {
+    background-color: #ffb6c1;
+    color: white;
+}
+
+    .edittriv:hover {
+        background-color: #ff69b4;
+    }
+
+.deletetriv {
+    background-color: #ff7f7f;
+    color: white;
+}
+
+    .deletetriv:hover {
+        background-color: #ff4d4d;
+    }
+
+.viewtriv {
+    color: #5a2d32;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+    .viewtriv:hover {
+        color: #ff9999;
+    }
+
+.addedtriv {
+    background-color: #ffb6c1;
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 25px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+    .addedtriv:hover {
+        background-color: #ff69b4;
+    }
+
+.canceltriv {
+    background-color: #ffd6e7;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 25px;
+    color: #ff69b4;
+    font-size: 0.95rem;
+    cursor: pointer;
+    margin-left: 8px;
+    transition: background-color 0.3s ease;
+}
+
+    .canceltriv:hover {
+        background-color: #ffc0cb;
+    }
+
+.form-triv label {
+    font-weight: bold;
+    color: #ff69b4;
+}
+
+/* Eye tips Page */
+
+/* Container */
+.eyetipss {
+    background-color: #ffe4ec; /* soft pink bubble */
+    border-radius: 20px;
+    padding: 20px;
+    height: 80vh; /* fixed height for the bubble */
+    overflow-y: auto; /* internal scroll */
+    box-shadow: 0 4px 12px rgba(255, 105, 180, 0.15);
+    display: flex;
+    flex-direction: column;
+    scrollbar-width: thin;
+    scrollbar-color: #ffb6c1 #ffe4ec;
+}
+
+    /* Title */
+    .eyetipss h3 {
+        color: #ff69b4;
+        font-family: Cooper;
+        text-align: center;
+        font-size: 2rem;
+        margin-bottom: 20px;
+        text-shadow: 1px 1px 2px rgba(255, 105, 180, 0.3);
+    }
+
+/* Add Tip Button */
+.addtip {
+    background-color: #ffb6c1;
+    border: none;
+    color: #fff;
+    padding: 8px 15px;
+    border-radius: 15px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.2s;
+}
+
+    .addtip:hover {
+        background-color: #ff69b4;
+    }
+
+/* Search Form */
+.search-tips-form {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    border-radius: 25px;
+    padding: 5px 10px;
+    box-shadow: 0 2px 5px rgba(255, 105, 180, 0.3);
+}
+
+.search-icon {
+    font-size: 16px;
+    color: #ff69b4;
+    margin-right: 8px;
+}
+
+.search-container input {
+    border: none;
+    outline: none;
+    padding: 6px;
+    border-radius: 25px;
+    width: 180px;
+    font-size: 14px;
+}
+
+/* Save Tip Button */
+.addedtip {
+    background-color: #ffb6c1;
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 25px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    margin-top: 10px;
+}
+
+    .addedtip:hover {
+        background-color: #ff69b4;
+    }
+
+.canceltip {
+    background-color: #ffd6e7;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 25px;
+    color: #ff69b4;
+    font-size: 0.95rem;
+    cursor: pointer;
+    margin-left: 8px;
+    transition: background-color 0.3s ease;
+}
+
+    .canceltip:hover {
+        background-color: #ffc0cb;
+    }
+/* Table */
+.tiptable {
+    margin-top: 20px;
+}
+
+.tabletip {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0px 2px 8px rgba(255, 182, 193, 0.3);
+}
+
+    .tabletip th {
+        background-color: #ffb6c1;
+        color: white;
+        padding: 10px;
+        text-align: left;
+        font-size: 14px;
+        border-bottom: 1px solid #f8c6d8;
+    }
+
+    .tabletip td {
+        padding: 10px;
+        font-size: 14px;
+        border-bottom: 1px solid #ffe4e9;
+    }
+
+/* Edit & Delete Buttons */
+.edittip, .deletetip {
+    border: none;
+    padding: 6px 10px;
+    border-radius: 50%;
+    font-size: 16px;
+    cursor: pointer;
+    margin: 0 3px;
+    transition: background-color 0.2s;
+}
+
+.edittip {
+    background-color: #ffb6c1;
+    color: white;
+}
+
+    .edittip:hover {
+        background-color: #ff69b4;
+    }
+
+.deletetip {
+    background-color: #ff7f7f;
+    color: white;
+}
+
+    .deletetip:hover {
+        background-color: #ff4d4d;
+    }
+
+/* Form Fields */
+.form-tip label {
+    font-weight: bold;
+    color: #ff69b4;
+    margin-top: 10px;
+    display: block;
+}
+
+.form-tip input,
+.form-tip textarea {
+    border-radius: 10px;
+    border: 1px solid #ffb6c1;
+    padding: 8px;
+    font-size: 14px;
+    width: 100%;
+    margin-top: 5px;
+}
+
+.viewtips {
+    color: #5a2d32;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+    .viewtips:hover {
+        color: #ff9999;
+    }
+
+/* Container */
+.eyeissue {
+    background-color: #ffe4ec; /* soft pink bubble */
+    border-radius: 20px;
+    padding: 20px;
+    height: 80vh; /* fixed height for the bubble */
+    overflow-y: auto; /* internal scroll */
+    box-shadow: 0 4px 12px rgba(255, 105, 180, 0.15);
+    display: flex;
+    flex-direction: column;
+    scrollbar-width: thin;
+    scrollbar-color: #ffb6c1 #ffe4ec;
+}
+
+    /* Title */
+    .eyeissue h3 {
+        color: #ff69b4;
+        font-family: Cooper;
+        text-align: center;
+        margin-bottom: 20px;
+        font-size: 1.8rem;
+        text-shadow: 1px 1px 2px rgba(255, 105, 180, 0.2);
+    }
+
+/* Add Issue Button */
+.addissue {
+    background-color: #ffb6c1;
+    color: #fff;
+    padding: 8px 15px;
+    border-radius: 15px;
+    border: none;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.2s;
+}
+
+    .addissue:hover {
+        background-color: #ff69b4;
+    }
+
+/* Search Bubble */
+.search-bubble {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    border: 2px solid #ffb6c1;
+    border-radius: 25px;
+    padding: 5px 12px;
+    width: 100%;
+    max-width: 300px;
+    box-shadow: 0 2px 4px rgba(255, 182, 193, 0.2);
+}
+
+    .search-bubble input {
+        border: none;
+        outline: none;
+        flex: 1;
+        font-size: 0.95rem;
+        padding: 5px;
+        background: transparent;
+    }
+
+    .search-bubble button {
+        background: none;
+        border: none;
+        font-size: 1.1rem;
+        color: #ff69b4;
+        cursor: pointer;
+    }
+
+/* Form Section */
+.form-issue label {
+    font-weight: bold;
+    color: #ff69b4;
+}
+
+.form-control {
+    border: 1px solid #ffb6c1;
+    border-radius: 8px;
+    padding: 8px;
+}
+
+    .form-control:focus {
+        border-color: #ff69b4;
+        box-shadow: 0 0 4px rgba(255, 105, 180, 0.3);
+    }
+
+/* Save & Cancel Buttons */
+.saveissue {
+    background-color: #ffb6c1;
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 25px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    margin-top: 10px;
+}
+
+    .saveissue:hover {
+        background-color: #ff69b4;
+    }
+
+.cancelissue {
+    background-color: #ffd6e7;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 25px;
+    color: #ff69b4;
+    font-size: 0.95rem;
+    cursor: pointer;
+    margin-left: 8px;
+    transition: background-color 0.3s ease;
+}
+
+    .cancelissue:hover {
+        background-color: #ffc0cb;
+    }
+
+/* Table */
+.tableissue {
+    margin-top: 20px;
+    overflow-x: auto;
+}
+
+.issuetable {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(255, 182, 193, 0.3);
+}
+
+    .issuetable th {
+        background-color: #ffb6c1;
+        color: white;
+        padding: 10px;
+        text-align: left;
+    }
+
+    .issuetable td {
+        padding: 10px;
+        border-bottom: 1px solid #ffd6e7;
+    }
+
+.editi, .deletei {
+    border: none;
+    padding: 6px 10px;
+    border-radius: 50%;
+    font-size: 16px;
+    cursor: pointer;
+    margin: 0 3px;
+    transition: background-color 0.2s;
+}
+
+.editi {
+    background-color: #ffb6c1;
+    color: white;
+}
+
+    .editi:hover {
+        background-color: #ff69b4;
+    }
+
+.deletei {
+    background-color: #ff7f7f;
+    color: white;
+}
+
+    .deletei:hover {
+        background-color: #ff4d4d;
+    }
+
+.viewi {
+    color: #5a2d32;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+    .viewi:hover {
+        color: #ff9999;
+    }
+
+/*EYE LIBRARY*/
+/* Tabs container */
+.eyelibrary {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Each tab item */
+.eyelib {
+    margin: 0 5px;
+}
+
+/* Tab link */
+.eyelibra {
+    margin-bottom: -39px;
+    margin-left: -5px;
+    display: block;
+    padding: 10px 20px;
+    padding-bottom: 20px;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    text-decoration: none;
+    font-weight: bold;
+    color: #ff69b4; /* hot pink text */
+    transition: all 0.3s ease;
+}
+
+    /* Active tab */
+    .eyelibra.active {
+        background-color: #ffe4ec;
+        color: #5e2c4c;
+        border-bottom: 2px solid #ffe4ec; /* blend with background so it looks raised */
+    }
+
+    /* Hover effect */
+    .eyelibra:hover {
+        background-color: #ffe4ec;
+        color: #5e2c4c;
+    }
+
+
+/* Cancel Trivia Button */
+.canceltriv {
     background-color: #f8cce5;
     color: #b23a6f;
     border: 2px solid #f4adc6;
@@ -279,27 +1006,727 @@ footer {
     font-weight: bold;
     cursor: pointer;
     transition: all 0.3s ease;
-    margin-top: 25px;
-    box-shadow: 0 2px 6px rgba(255, 105, 180, 0.2);
 }
 
-    .applysort:hover {
+    .canceltriv:hover {
         background-color: #f4adc6;
         color: white;
+        box-shadow: 0 4px 8px rgba(244, 173, 198, 0.4);
         transform: scale(1.05);
-        box-shadow: 0 4px 10px rgba(255, 105, 180, 0.3);
     }
 
-.undohis {
-    background: #ff7f7f;
-    border: none;
-    color: white;
-    padding: 6px 12px;
-    border-radius: 8px;
+
+
+.logout {
+    background-color: #f8cce5;
+    color: #b23a6f;
+    border: 2px solid #f4adc6;
+    border-radius: 25px;
+    padding: 8px 20px;
+    font-size: 14px;
+    font-weight: bold;
     cursor: pointer;
-    transition: 0.2s;
+    transition: all 0.3s ease;
 }
 
-    .undohis:hover {
-        background: #311d26;
+    .logout:hover {
+        background-color: #f4adc6;
+        color: white;
+        box-shadow: 0 4px 8px rgba(244, 173, 198, 0.4);
+        transform: scale(1.05);
     }
+
+/*achievements css*/
+
+/* Bubble container */
+.achievements {
+    background-color: #ffe4ec;
+    border-radius: 20px;
+    padding: 20px;
+    height: 80vh; /* fixed bubble height */
+    box-shadow: 0 4px 12px rgba(255, 105, 180, 0.15);
+    display: flex;
+    flex-direction: column;
+}
+
+    /* Scrollable section */
+    .achievements .content {
+        flex: 1;
+        overflow-y: auto;
+        scrollbar-width: thin;
+        scrollbar-color: #ffb6c1 #ffe4ec;
+        padding-right: 5px;
+    }
+
+/* Title */
+.achie h3 {
+    color: #ff69b4;
+    font-family: Cooper;
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 20px;
+    text-shadow: 1px 1px 2px rgba(255, 105, 180, 0.3);
+}
+
+/* Add Achievement Button */
+.addach {
+    background-color: #ffb6c1;
+    border: none;
+    color: #fff;
+    padding: 8px 15px;
+    border-radius: 15px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.2s;
+}
+
+    .addach:hover {
+        background-color: #ff69b4;
+    }
+
+/* Search Form */
+.search-form {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    border-radius: 25px;
+    padding: 5px 10px;
+    box-shadow: 0 2px 5px rgba(255, 105, 180, 0.3);
+}
+
+.search-icon {
+    font-size: 16px;
+    color: #ff69b4;
+    margin-right: 8px;
+}
+
+.search-container input {
+    border: none;
+    outline: none;
+    padding: 6px;
+    border-radius: 25px;
+    width: 180px;
+    font-size: 14px;
+}
+
+/* Save Achievement Button */
+.addedach {
+    background-color: #ffb6c1;
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 25px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    margin-top: 10px;
+}
+
+    .addedach:hover {
+        background-color: #ff69b4;
+    }
+
+.cancelach {
+    background-color: #ffd6e7;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 25px;
+    color: #ff69b4;
+    font-size: 0.95rem;
+    cursor: pointer;
+    margin-left: 8px;
+    transition: background-color 0.3s ease;
+}
+
+    .cancelach:hover {
+        background-color: #ffc0cb;
+    }
+
+/* Table */
+.tableach {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0px 2px 8px rgba(255, 182, 193, 0.3);
+}
+
+    .tableach th {
+        background-color: #ffb6c1;
+        color: white;
+        padding: 10px;
+        text-align: left;
+        font-size: 14px;
+        border-bottom: 1px solid #f8c6d8;
+    }
+
+    .tableach td {
+        padding: 10px;
+        font-size: 14px;
+        border-bottom: 1px solid #ffe4e9;
+    }
+
+/* Edit & Delete Buttons */
+.editach, .deleteach {
+    border: none;
+    padding: 6px 10px;
+    border-radius: 50%;
+    font-size: 16px;
+    cursor: pointer;
+    margin: 0 3px;
+    transition: background-color 0.2s;
+}
+
+.editach {
+    background-color: #ffb6c1;
+    color: white;
+}
+
+    .editach:hover {
+        background-color: #ff69b4;
+    }
+
+.deleteach {
+    background-color: #ff7f7f;
+    color: white;
+}
+
+    .deleteach:hover {
+        background-color: #ff4d4d;
+    }
+
+/* Form Fields */
+.form-ach label {
+    font-weight: bold;
+    color: #ff69b4;
+    margin-top: 10px;
+    display: block;
+}
+
+.form-ach input,
+.form-ach textarea {
+    border-radius: 10px;
+    border: 1px solid #ffb6c1;
+    padding: 8px;
+    font-size: 14px;
+    width: 100%;
+    margin-top: 5px;
+}
+
+::-webkit-scrollbar {
+    width: 10px; /* thickness */
+}
+
+::-webkit-scrollbar-track {
+    background: #ffe4ec; /* light pink track */
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #ffb6c1; /* soft pink thumb */
+    border-radius: 10px;
+    border: 2px solid #ffe4ec; /* gives it some spacing */
+}
+
+    ::-webkit-scrollbar-thumb:hover {
+        background-color: #ff69b4; /* darker pink on hover */
+    }
+
+/*wardrobe css*/
+
+/* Main bubble styling */
+.wardrobe {
+    background-color: #ffe4ec; /* soft pink bubble */
+    border-radius: 20px;
+    padding: 20px;
+    height: 80vh; /* fixed height for the bubble */
+    overflow-y: auto; /* internal scroll */
+    box-shadow: 0 4px 12px rgba(255, 105, 180, 0.15);
+    display: flex;
+    flex-direction: column;
+    scrollbar-width: thin;
+    scrollbar-color: #ffb6c1 #ffe4ec;
+}
+
+    .wardrobe::-webkit-scrollbar-track {
+        background: #ffe4ec;
+        border-radius: 10px;
+    }
+
+    .wardrobe::-webkit-scrollbar-thumb {
+        background-color: #ffb6c1;
+        border-radius: 10px;
+    }
+
+        .wardrobe::-webkit-scrollbar-thumb:hover {
+            background-color: #ff69b4;
+        }
+
+    /* Title styling */
+    .wardrobe h2 {
+        text-align: center;
+        font-family: Cooper;
+        color: #ff69b4;
+        margin-bottom: 15px;
+        text-shadow: 1px 1px 2px rgba(255, 105, 180, 0.3);
+    }
+
+/* Header section (Add Item + Search) */
+.wardrobe-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+/* Add item button */
+.addward {
+    background-color: #ffb6c1;
+    color: #fff;
+    padding: 8px 15px;
+    border-radius: 15px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.2s;
+}
+
+    .addward:hover {
+        background-color: #ff69b4;
+    }
+
+/* Search form styling */
+.search-form {
+    display: flex;
+    align-items: center;
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+    background: #fff;
+    padding: 5px 8px;
+    border-radius: 15px;
+}
+
+    .search-container input {
+        border: none;
+        outline: none;
+        padding: 5px;
+        background: transparent;
+    }
+
+.clear-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+/* Table styling */
+.wardrobe-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+    .wardrobe-table th,
+    .wardrobe-table td {
+        padding: 10px;
+        text-align: left;
+        border-bottom: 1px solid #f8c6d8;
+    }
+
+    .wardrobe-table th {
+        background-color: #ffb6c1;
+        color: #fff;
+    }
+
+    /* Removed hover styling */
+    .wardrobe-table tr:hover {
+        background-color: transparent;
+    }
+
+/* Action buttons */
+.editward, .deleteward {
+    display: inline-flex; /* ✅ para magkatabi */
+    align-items: center;
+    justify-content: center;
+    border: none;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    font-size: 18px;
+    cursor: pointer;
+    margin: 0 3px;
+    transition: background-color 0.2s, transform 0.2s;
+    vertical-align: middle; /* para pantay sila */
+}
+
+.editward {
+    background-color: #ffb6c1;
+    color: white;
+    text-decoration: none;
+}
+
+    .editward:hover {
+        background-color: #ff69b4;
+        transform: scale(1.1);
+    }
+
+.deleteward {
+    background-color: #ff7f7f;
+    color: white;
+}
+
+    .deleteward:hover {
+        background-color: #ff4d4d;
+        transform: scale(1.1);
+    }
+
+
+
+/* Container styling */
+.wardrobe-form-container {
+    background-color: #ffe4ec; /* soft pink bubble */
+    border-radius: 20px;
+    padding: 25px;
+    max-width: 600px;
+    height: 80vh; /* fixed height bubble */
+    overflow-y: auto; /* scroll inside */
+    margin: 0 auto;
+    box-shadow: 0 4px 12px rgba(255, 105, 180, 0.15);
+    /* For smooth scrolling */
+    scrollbar-width: thin;
+    scrollbar-color: #ffb6c1 #ffe4ec;
+}
+
+    /* Cute scrollbar for WebKit browsers */
+    .wardrobe-form-container::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    .wardrobe-form-container::-webkit-scrollbar-track {
+        background: #ffe4ec;
+        border-radius: 10px;
+    }
+
+    .wardrobe-form-container::-webkit-scrollbar-thumb {
+        background-color: #ffb6c1;
+        border-radius: 10px;
+    }
+
+        .wardrobe-form-container::-webkit-scrollbar-thumb:hover {
+            background-color: #ff69b4;
+        }
+
+/*feedback css*/
+
+.feedback-bubble-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 20px;
+    min-height: 300px; /* so there's space for centering if empty */
+    position: relative;
+}
+
+/* Bubble style */
+.feedback-bubble {
+    background: #f1f1f1;
+    border-radius: 20px;
+    padding: 15px 20px;
+    max-width: 500px;
+    position: relative;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+    /* little bubble tail */
+    .feedback-bubble::after {
+        content: "";
+        position: absolute;
+        bottom: -10px;
+        left: 20px;
+        border-width: 10px;
+        border-style: solid;
+        border-color: #f1f1f1 transparent transparent transparent;
+    }
+
+.feedback-date {
+    font-size: 0.8rem;
+    color: #888;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.feedback-message {
+    margin: 0;
+    font-size: 1rem;
+    color: #333;
+}
+
+/* Center the 'no feedback' */
+.no-feedback {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #aaa;
+    text-align: center;
+}
+
+
+/* General page style */
+body {
+    margin: 0;
+    font-family: 'Comic Sans MS', 'Poppins', sans-serif;
+    background: url('/images/adminbg.png') no-repeat center center fixed;
+    background-size: cover;
+}
+
+/* Container for left (cat) + right (form) */
+.login-container {
+    display: flex;
+    min-height: 100vh;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    gap: 40px;
+}
+
+/* Left side: Cat image */
+.login-left {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cat-image {
+    width: 300px;
+    max-width: 90%;
+}
+
+/* Right side: Titles + form */
+.login-right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #4b4b00;
+    padding: 20px;
+}
+
+    .login-right h1 {
+        font-size: 36px;
+        font-weight: bold;
+        margin: 0 0 10px 0;
+    }
+
+    .login-right h2 {
+        font-size: 24px;
+        font-weight: bold;
+        margin: 10px 0 30px 0;
+        color: #a33c6b;
+    }
+
+/* Form */
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 400px;
+    gap: 15px;
+}
+
+/* Input wrapper for admin code */
+.password-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+    .password-wrapper input.admin-input {
+        width: 100%;
+        padding: 12px 45px 12px 12px;
+        border-radius: 20px;
+        border: none;
+        text-align: center;
+        color: hotpink;
+        font-weight: bold;
+        font-family: 'Comic Sans MS', 'Poppins', sans-serif;
+        box-sizing: border-box;
+        outline: none;
+    }
+
+/* Toggle eye icon */
+.toggle-visibility {
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: gray;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Login button */
+.login-btn {
+    background-color: #ffe1f0;
+    color: #4b4b00;
+    font-weight: bold;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 14px;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+    min-width: 150px; /* smaller than input */
+    text-align: center;
+}
+
+    .login-btn:hover {
+        background-color: #ffcadf;
+    }
+
+/* Error message */
+.error {
+    color: red;
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+.hamburger {
+    display: none;
+    cursor: pointer;
+    font-size: 24px;
+    color: #ff69b4;
+    background: none;
+    border: none;
+    margin-left: auto; /* push to right */
+    margin-top: 10px;
+}
+
+@media screen and (max-width: 768px) {
+    .sidebar {
+        position: fixed;
+        top: 0;
+        left: -250px;
+        height: 100%;
+        width: 250px;
+        background: #ffb6c1;
+        transition: left 0.3s ease;
+        flex-direction: column;
+        justify-content: flex-start;
+        z-index: 1200;
+        box-shadow: 2px 0 8px rgba(0,0,0,0.2); 
+    }
+
+        .sidebar.active {
+            left: 0;
+        }
+
+    /* hamburger visible sa mobile */
+    .hamburger {
+        display: block;
+        position: fixed;
+        top: 15px;
+        left: 15px;
+        font-size: 1.5rem;
+        z-index: 1300;
+        background: none;
+        border: none;
+        cursor: pointer;
+    }
+
+    ul.sidebarmenu {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .greeting {
+        font-size: 15px;
+        margin-left: 25px;
+    }
+    .addtriv {
+        background-color: #ffb6c1;
+        color: #fff;
+        padding: 5px 10px;
+        border-radius: 15px;
+        border: none;
+        text-decoration: none;
+        font-weight: bold;
+        transition: background-color 0.2s;
+        font-size: 15px;
+        margin-left: 25px;
+    }
+
+    .addtip {
+        background-color: #ffb6c1;
+        border: none;
+        color: #fff;
+        border-radius: 15px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: background-color 0.2s;
+        padding: 5px 10px;
+        font-size: 15px;
+        margin-left: 25px;
+    }
+
+    .addissue {
+        background-color: #ffb6c1;
+        color: #fff;
+        border-radius: 15px;
+        border: none;
+        text-decoration: none;
+        font-weight: bold;
+        transition: background-color 0.2s;
+        padding: 5px 10px;
+        font-size: 15px;
+        margin-left: 25px;
+    }
+
+    .addach {
+        background-color: #ffb6c1;
+        border: none;
+        color: #fff;
+        border-radius: 15px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: background-color 0.2s;
+        padding: 5px 10px;
+        font-size: 15px;
+        margin-left: 25px;
+    }
+
+    .addward {
+        background-color: #ffb6c1;
+        color: #fff;
+        border-radius: 15px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: background-color 0.2s;
+        padding: 5px 10px;
+        font-size: 15px;
+        margin-left: 25px;
+    }
+}

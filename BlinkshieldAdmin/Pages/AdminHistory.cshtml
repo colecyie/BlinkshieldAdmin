@@ -6,7 +6,7 @@
 
 
 <!-- Sort Bar -->
-<form method="get">
+<div class="sort-wrapper">
     <div class="sorthis">
         <label for="sorthistory">Sort by Action:</label>
         <select id="sorthistory" asp-for="SelectedAction" asp-items="Model.ActionOptions"
@@ -22,7 +22,8 @@
             <option value="">All</option>
         </select>
     </div>
-</form>
+</div>
+
 
 <div class="history">
 

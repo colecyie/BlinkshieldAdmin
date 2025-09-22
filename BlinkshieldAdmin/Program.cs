@@ -1,16 +1,10 @@
 using BlinkshieldAdmin.Data;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.FileProviders;
-using Microsoft.AspNetCore.Http;
-using System.IO;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Read connection string from env var (Railway) or fallback to appsettings.json
-var envConn = Environment.GetEnvironmentVariable("MYSQLCONN");
-var connectionString = !string.IsNullOrEmpty(envConn)
-    ? envConn
-    : builder.Configuration.GetConnectionString("DefaultConnection");
+// Use connection string from appsettings.json
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
 // Register DbContext with MySQL
 builder.Services.AddDbContext<BlinkDbContext>(options =>
@@ -23,21 +17,6 @@ builder.Services.AddHttpContextAccessor();
 
 var app = builder.Build();
 
-// If Railway (or environment) provides a PORT, bind to it (0.0.0.0 to accept external traffic)
-var port = Environment.GetEnvironmentVariable("PORT");
-if (!string.IsNullOrEmpty(port))
-{
-    app.Urls.Clear();
-    app.Urls.Add($"http://0.0.0.0:{port}");
-}
-
-// Ensure uploads folder exists (so static files won't fail)
-var uploadsPath = Path.Combine(Directory.GetCurrentDirectory(), "uploads");
-if (!Directory.Exists(uploadsPath))
-{
-    Directory.CreateDirectory(uploadsPath);
-}
-
 // Error handling
 if (!app.Environment.IsDevelopment())
 {
@@ -47,13 +26,6 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles(); // Serve wwwroot files
-
-// Serve /uploads as static content
-app.UseStaticFiles(new StaticFileOptions
-{
-    FileProvider = new PhysicalFileProvider(uploadsPath),
-    RequestPath = "/uploads"
-});
 
 app.UseSession();
 
@@ -71,3 +43,4 @@ app.MapControllers();
 app.MapRazorPages();
 
 app.Run();
+ 

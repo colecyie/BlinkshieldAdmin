@@ -50,7 +50,5 @@ namespace BlinkshieldAdmin.Models
         [Column("breaks_taken")]
         public int? BreaksTaken { get; set; }        // Changed to int?
 
-        [Column("health_score")]
-        public float? HealthScore { get; set; }      // Changed to float?
     }
 }
